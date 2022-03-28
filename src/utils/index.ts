@@ -38,7 +38,7 @@ export type Keyboard = {
 };
 
 export const buildKeyboardResponse = (results?: Result[]): Keyboard => ({
-  ...Object.keys(Alphabet).reduce(
+  ...Object.values(Alphabet).reduce(
     (acc, letter) => ({ ...acc, [letter]: 'unused' }),
     {}
   ),
