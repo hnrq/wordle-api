@@ -1,5 +1,5 @@
-import * as services from 'services/wordle.service';
-import { compareWords, buildKeyboardResponse } from 'utils';
+import * as services from '../services/wordle.service';
+import { compareWords, buildKeyboardResponse } from '../utils';
 
 export const guessWord = async (guess: string) => {
   const randomWord = await services.getRandomWord();
