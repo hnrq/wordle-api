@@ -7,7 +7,7 @@ interface Word {
 
 export const getRandomWord = async (): Promise<string> => {
   const response: AxiosResponse<Word> = await axios.get(
-    `${process.env.API_HOST}/v4/words.json/randomWord`,
+    `${process.env.API_HOST}/words.json/randomWord`,
     {
       params: {
         api_key: process.env.API_KEY,
