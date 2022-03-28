@@ -29,5 +29,5 @@ jobs:
           rm -rf ./src
       - name: Deploy to AWS Lambda
         run: |
-          zip -j deploy.zip ./*
+          zip -r deploy.zip ./*
           aws lambda update-function-code --function-name=wordle-api --zip-file=fileb://deploy.zip
