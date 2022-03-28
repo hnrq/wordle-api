@@ -4,48 +4,45 @@ interface Result {
   status: 'present' | 'absent' | 'correct';
 }
 
-enum Alphabet {
-  A,
-  B,
-  C,
-  D,
-  E,
-  F,
-  G,
-  H,
-  I,
-  J,
-  K,
-  L,
-  M,
-  N,
-  O,
-  P,
-  Q,
-  R,
-  S,
-  T,
-  U,
-  V,
-  W,
-  X,
-  Y,
-  Z
-}
+const alphabet = [
+  'A',
+  'B',
+  'C',
+  'D',
+  'E',
+  'F',
+  'G',
+  'H',
+  'I',
+  'J',
+  'K',
+  'L',
+  'M',
+  'N',
+  'O',
+  'P',
+  'Q',
+  'R',
+  'S',
+  'T',
+  'U',
+  'V',
+  'W',
+  'X',
+  'Y',
+  'Z'
+];
 
 export type Keyboard = {
-  [key in keyof typeof Alphabet]?: Result['status'] | 'unused';
+  [key: string]: Result['status'] | 'unused';
 };
 
 export const buildKeyboardResponse = (results?: Result[]): Keyboard => ({
-  ...Object.values(Alphabet).reduce(
-    (acc, letter) => ({ ...acc, [letter]: 'unused' }),
-    {}
-  ),
+  ...alphabet.reduce((acc, letter) => ({ ...acc, [letter]: 'unused' }), {}),
   ...results?.reduce(
     (acc, result) => ({
       ...acc,
-      [result.letter as keyof typeof Alphabet]: result.status
+      [result.letter]: result.status
     }),
     {}
   )
