@@ -3,7 +3,10 @@ import { guessWord } from './controllers/wordle.controller';
 
 export const handler = async (
   event: APIGatewayProxyEvent
-): Promise<APIGatewayProxyResult> => ({
-  statusCode: 200,
-  body: JSON.stringify(guessWord(event.pathParameters?.word ?? ''))
-});
+): Promise<APIGatewayProxyResult> => {
+  const response = await guessWord(event.pathParameters?.word ?? '');
+  return {
+    statusCode: 200,
+    body: JSON.stringify(response)
+  };
+};
