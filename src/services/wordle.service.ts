@@ -5,7 +5,7 @@ import { getDate } from '../utils';
 const TABLE_NAME = 'Wordle';
 
 const dynamoDB = new DynamoDB({
-  region: 'us-east-1',
+  region: 'sa-east-1',
   apiVersion: '2012-08-10'
 });
 
