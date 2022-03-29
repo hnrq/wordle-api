@@ -54,7 +54,7 @@ export const getRandomWord = async (): Promise<string> => {
   if (storedWord.Item) return storedWord.Item.toString();
 
   const word = await fetchRandomWord();
-  saveWord(word);
+  await saveWord(word);
 
   return word;
 };
