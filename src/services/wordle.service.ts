@@ -50,9 +50,9 @@ const getWordByDate = async () =>
     })
     .promise();
 
-export const getRandomWord = async (): Promise<string | undefined> => {
+export const getRandomWord = async (): Promise<string> => {
   const storedWord = await getWordByDate();
-  if (storedWord.Item) return storedWord.Item['Word'].S;
+  if (storedWord.Item) return storedWord.Item['Word'].S as string;
 
   const word = await fetchRandomWord();
   await saveWord(word);
