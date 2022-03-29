@@ -67,5 +67,5 @@ export const compareWords = (target: string, guess: string): Result[] =>
 
 export const getDate = () => {
   const today = new Date();
-  return `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear}`;
+  return `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`;
 };
