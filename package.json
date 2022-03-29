@@ -1,7 +1,8 @@
 {
   "scripts": {
     "compile": "tsc",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "locally": "node -e \"console.log(require('./build/app.js').handler(require('./events/event.json')));\""
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.93",
@@ -13,9 +14,11 @@
     "jest": "^27.5.1",
     "prettier": "^2.6.1",
     "ts-jest": "^27.1.4",
+    "ts-node": "^10.7.0",
     "typescript": "^4.6.3"
   },
   "dependencies": {
+    "aws-sdk": "^2.1102.0",
     "axios": "^0.26.1"
   },
   "jest": {

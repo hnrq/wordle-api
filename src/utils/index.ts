@@ -64,3 +64,8 @@ export const compareWords = (target: string, guess: string): Result[] =>
     index,
     status: letterStatus(target, letter, index)
   }));
+
+export const getDate = () => {
+  const today = new Date();
+  return `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear}`;
+};

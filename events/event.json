@@ -5,7 +5,7 @@
   "httpMethod": "GET",
   "isBase64Encoded": true,
   "pathParameters": {
-    "proxy": "hello"
+    "word": "hello"
   },
   "headers": {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
