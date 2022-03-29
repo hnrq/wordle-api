@@ -1,3 +1,4 @@
+[![Deploy Lambda](https://github.com/hnrq/wordle-api/actions/workflows/pipeline.yaml/badge.svg)](https://github.com/hnrq/wordle-api/actions/workflows/pipeline.yaml)
 # wordle-api
 
 This project contains source code and supporting files for a serverless application that you can deploy with the SAM CLI. It includes the following files and folders.
