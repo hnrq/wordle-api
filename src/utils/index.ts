@@ -53,8 +53,8 @@ const letterStatus = (
   letter: string,
   index: number
 ): Result['status'] => {
-  if (target.charAt(index) === letter) return 'correct';
-  if (target.indexOf('letter') !== -1) return 'present';
+  if (target.toLowerCase().charAt(index) === letter) return 'correct';
+  if (target.toLowerCase().indexOf('letter') !== -1) return 'present';
   return 'absent';
 };
 

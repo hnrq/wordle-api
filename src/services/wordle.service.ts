@@ -33,7 +33,8 @@ const fetchRandomWord = async (): Promise<string> => {
         api_key: process.env.API_KEY,
         hasDictionaryDef: 'true',
         minLength: '5',
-        maxLength: '5'
+        maxLength: '5',
+        includePartOfSpeech: 'verb,noun,imperative,noun-plural'
       }
     }
   );
