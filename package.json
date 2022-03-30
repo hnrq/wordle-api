@@ -1,7 +1,7 @@
 {
   "scripts": {
     "compile": "tsc",
-    "test": "jest --watchAll",
+    "test": "jest --watch",
     "locally": "ts-node -e \"console.log(require('./src/app.ts').handler(require('./events/event.json')));\""
   },
   "devDependencies": {
@@ -28,12 +28,14 @@
       "src"
     ],
     "transform": {
-      "^.+\\.js$": "babel-jest",
       "^.+\\.ts$": "ts-jest"
     },
+    "testMatch": [
+      "<rootDir>/src/**/*.test.ts"
+    ],
     "moduleFileExtensions": [
-      "js",
-      "ts"
+      "ts",
+      "js"
     ]
   }
 }
