@@ -21,8 +21,7 @@ export const letterStatus = (
   index: number,
   letterCount: number = 0
 ): Result['status'] => {
-  if (target.toLowerCase().charAt(index) === letter && letterCount > 0)
-    return 'correct';
+  if (target.toLowerCase().charAt(index) === letter) return 'correct';
   if (target.toLowerCase().indexOf(letter) !== -1 && letterCount > 0)
     return 'present';
   return 'absent';
