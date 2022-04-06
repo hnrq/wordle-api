@@ -9,5 +9,5 @@ export const guessWord = async (guess: string) => {
   return { result, keyboard };
 };
 
-
-export const findWord = async(word: string) => services.findWord(word);
+export const isWordValid = async (word: string) =>
+  await services.isWordValid(word);

@@ -2,7 +2,6 @@ import axios, { AxiosResponse } from 'axios';
 import { DynamoDB } from 'aws-sdk';
 import { getDate } from '../utils';
 
-const TABLE_NAME = 'Wordle';
 const params = {
   api_key: process.env.API_KEY,
   hasDictionaryDef: 'true',
@@ -26,7 +25,7 @@ interface Word {
 const saveWord = async (word: string) =>
   dynamoDB
     .putItem({
-      TableName: TABLE_NAME,
+      TableName: process.env.TABLE_NAME ?? '',
       Item: {
         Date: { S: getDate() },
         Word: { S: word }
@@ -46,7 +45,7 @@ const fetchRandomWord = async (): Promise<string> => {
 const getWordByDate = async () =>
   dynamoDB
     .getItem({
-      TableName: TABLE_NAME,
+      TableName: process.env.TABLE_NAME ?? '',
       Key: { Date: { S: getDate() } }
     })
     .promise();
@@ -62,7 +61,13 @@ export const getRandomWord = async (): Promise<string> => {
 };
 
 // using scrabble score because searchWord has been deprecated.
-export const findWord = async (word: string) =>
-  axios.get(`${process.env.API_HOST}/word.json/${word}/scrabbleScore`, {
-    params
-  });
+export const isWordValid = async (word: string) => {
+  const response = await axios.get(
+    `${process.env.API_HOST}/word.json/${word}/scrabbleScore`,
+    {
+      params
+    }
+  );
+
+  return response.status === 200;
+};

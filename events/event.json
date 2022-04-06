@@ -1,7 +1,7 @@
 {
   "body": "eyJ0ZXN0IjoiYm9keSJ9",
-  "resource": "/{word}",
-  "path": "/hello",
+  "resource": "/guess/{word}",
+  "path": "/guess/hello",
   "httpMethod": "GET",
   "isBase64Encoded": true,
   "pathParameters": {
