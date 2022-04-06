@@ -62,12 +62,15 @@ export const getRandomWord = async (): Promise<string> => {
 
 // using scrabble score because searchWord has been deprecated.
 export const isWordValid = async (word: string) => {
-  const response = await axios.get(
-    `${process.env.API_HOST}/word.json/${word}/scrabbleScore`,
-    {
-      params
-    }
-  );
-
-  return response.status === 200;
+  try {
+    const response = await axios.get(
+      `${process.env.API_HOST}/word.json/${word}/scrabbleScore`,
+      {
+        params
+      }
+    );
+    return true;
+  } catch (e) {
+    return false;
+  }
 };

@@ -51,7 +51,4 @@ export const compareWords = (
   });
 };
 
-export const getDate = () => {
-  const today = new Date();
-  return `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`;
-};
+export const getDate = () => new Date().toISOString().slice(0, 10);
