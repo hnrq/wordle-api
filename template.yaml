@@ -13,7 +13,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: build
-      Handler: app.handler
+      Handler: app.guessHandler
       MemorySize: 128
       Timeout: 100
       Description: Guess if word is right.
@@ -24,6 +24,22 @@ Resources:
           Type: Api
           Properties:
             Path: /{word}
+            Method: GET
+  findFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: build
+      Handler: app.findHandler
+      MemorySize: 128
+      Timeout: 100
+      Description: Guess if word is right.
+      Architectures:
+        - x86_64
+      Events:
+        Wordle:
+          Type: Api
+          Properties:
+            Path: /find
             Method: GET
 
 Outputs:

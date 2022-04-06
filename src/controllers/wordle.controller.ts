@@ -8,3 +8,6 @@ export const guessWord = async (guess: string) => {
 
   return { result, keyboard };
 };
+
+
+export const findWord = async(word: string) => services.findWord(word);

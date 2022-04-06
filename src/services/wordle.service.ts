@@ -3,6 +3,15 @@ import { DynamoDB } from 'aws-sdk';
 import { getDate } from '../utils';
 
 const TABLE_NAME = 'Wordle';
+const params = {
+  api_key: process.env.API_KEY,
+  hasDictionaryDef: 'true',
+  minLength: '5',
+  maxLength: '5',
+  includePartOfSpeech: 'verb,noun,noun-plural',
+  minCorpusCount: '500',
+  minDictionaryCount: '10'
+};
 
 const dynamoDB = new DynamoDB({
   region: 'sa-east-1',
@@ -28,15 +37,7 @@ const saveWord = async (word: string) =>
 const fetchRandomWord = async (): Promise<string> => {
   const response: AxiosResponse<Word> = await axios.get(
     `${process.env.API_HOST}/words.json/randomWord`,
-    {
-      params: {
-        api_key: process.env.API_KEY,
-        hasDictionaryDef: 'true',
-        minLength: '5',
-        maxLength: '5',
-        includePartOfSpeech: 'verb,noun,imperative,noun-plural'
-      }
-    }
+    { params }
   );
 
   return response.data.word;
@@ -59,3 +60,9 @@ export const getRandomWord = async (): Promise<string> => {
 
   return word;
 };
+
+// using scrabble score because searchWord has been deprecated.
+export const findWord = async (word: string) =>
+  axios.get(`${process.env.API_HOST}/word.json/${word}/scrabbleScore`, {
+    params
+  });
