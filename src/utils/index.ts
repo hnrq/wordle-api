@@ -4,15 +4,24 @@ interface Result {
   status: 'present' | 'absent' | 'correct';
 }
 
+const statusPriority = {
+  absent: 1,
+  present: 2,
+  correct: 3
+};
+
 export type Keyboard = Record<string, Result['status']>;
 
 export const buildKeyboardResponse = (results: Result[]): Keyboard =>
   results?.reduce(
     (acc, result) => ({
       ...acc,
-      [result.letter]: result.status
+      [result.letter]:
+        statusPriority[acc[result.letter]] > statusPriority[result.status]
+          ? acc[result.letter]
+          : result.status
     }),
-    {}
+    {} as Record<string, Result['status']>
   );
 
 // Thank you @chantastic!
