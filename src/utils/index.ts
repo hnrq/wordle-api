@@ -15,39 +15,40 @@ export const buildKeyboardResponse = (results: Result[]): Keyboard =>
     {}
   );
 
-export const letterStatus = (
-  target: string,
-  letter: string,
-  index: number,
-  letterCount: number = 0
-): Result['status'] => {
-  if (target.toLowerCase().charAt(index) === letter) return 'correct';
-  if (target.toLowerCase().indexOf(letter) !== -1 && letterCount > 0)
-    return 'present';
-  return 'absent';
-};
-
-export const countLetters = (word: string): Record<string, number> =>
-  word.split('').reduce(
-    (acc, currLetter) => ({
-      ...acc,
-      [currLetter]: (acc[currLetter] ?? 0) + 1
-    }),
+// Thank you @chantastic!
+export const getAvailableLettersPool = (
+  letterPairs: Array<[string, string]>
+): Record<string, number> =>
+  letterPairs.reduce(
+    (acc, [answerLetter, guessLetter]) =>
+      answerLetter === guessLetter
+        ? acc
+        : {
+            ...acc,
+            [answerLetter]: (acc[answerLetter] ?? 0) + 1
+          },
     {} as Record<string, number>
   );
 
-export const compareWords = (
-  target: string,
-  guess: string,
-  index: number = 0
-): Result[] => {
-  const wordCount = countLetters(target);
+export const compareWords = (answer: string, guess: string): Result[] => {
+  const letterPairs: Array<[string, string]> = Array.from(answer, (_, i) => [
+    answer[i],
+    guess[i]
+  ]);
+  const availableLettersPool = getAvailableLettersPool(letterPairs);
 
-  return guess.split('').map((letter, index) => {
-    const status = letterStatus(target, letter, index, wordCount[letter]);
-    if (status !== 'absent') wordCount[letter] -= 1;
+  return letterPairs.map(([answerLetter, guessLetter], index) => {
+    let status: Result['status'];
+    if (answerLetter === guessLetter) status = 'correct';
+    else if (
+      answer.includes(guessLetter) &&
+      availableLettersPool[guessLetter] > 0
+    ) {
+      availableLettersPool[guessLetter] = availableLettersPool[guessLetter] - 1;
+      status = 'present';
+    } else status = 'absent';
 
-    return { status, letter, index };
+    return { letter: guessLetter, status, index };
   });
 };
 
